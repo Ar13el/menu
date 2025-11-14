@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio</title>
+<style>
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #212121;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    height: 100vh;
+    gap: 20px;
+}
+
+#typing::after {
+    content: "|";
+    margin-left: 4px;
+    animation: blink 0.8s infinite;
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.menu{
+    width: 95%;
+    max-width: 650px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.botones{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.boton{
+    padding: 15px;
+    border: none;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+.boton:hover{
+    letter-spacing: 1.5px;
+    background-color: white;
+    color: #212121;
+    font-weight: bolder;
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+.panel {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.075);
+    backdrop-filter: blur(6px);
+    margin-top: -10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0 20px;
+    color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    transition: max-height 0.35s ease-out, padding 0.3s ease-out;
+}
+.panel.open {
+    padding: 15px 20px;
+    max-height: 200px;
+}
+
+.name {
+    font-weight: bolder !important;
+    font-size: inherit;
+    color: #d7d7d7;
+}
+
+#typing {
+    font-weight: normal;
+    color: white;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: large;
+}
+
+#side-menu {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background: #eeeeee;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+.side-btn {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+}
+.side-btn:hover {
+    transform: scale(1.3);
+    filter: brightness(1) invert(0.1);
+}
+
+.projects-options {
+    display: none;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 5px;
+}
+.projects-options a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Courier New', monospace;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    transition: background 0.2s;
+    font-size: 14px;
+}
+.projects-options a:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+span{
+
+
+    font-size:medium;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h1 style="color:white; text-align:center; font-family:'Courier New', monospace;">My page</h1>
+<p style="color:white; text-align:center; font-size:20px; font-family:'Courier New', monospace;">
+    Name: <span class="name">Ariel</span><br>
+    <span id="typing"></span>
+</p>
+
+<div class="menu">
+    <div class="botones">
+        <button class="boton">Skills</button>
+        <div class="panel">I work with these programming languages:<br>1.PHP (Laravel, Eloquent)<br>2.Python (Flask, MySQL, SQLite)<br>3.Node.js (Currently Learning)</div>
+
+        <button class="boton">Dev Tools</button>
+        <div class="panel">I work with databases and development tools:<br>1.MySQL / SQLite<br>2.Git & GitHub<br>3.Dependency management (Composer)</div>
+
+        <button class="boton">Additional Skills</button>
+        <div class="panel">Other skills and tools:<br>1.Frontend basics (HTML, CSS, JS)<br>2.Deployment & Hosting (GitHub Pages)<br>3.Unit Testing (PHPUnit, Pytest)</div>
+
+        <button class="boton">My Works</button>
+        <div class="panel">My works (Click to go):<br><a href="https://ar13el.github.io/ideonline/" target="_blank">1.IDE Online</a></div>
+    </div>
+</div>
+
+<div id="side-menu">
+    <a href="https://github.com/fibertel" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" class="side-btn" alt="GitHub">
+    </a>
+</div>
+
+<script>
+const frases = ["Backend enthusiast","Programming lover","Tech curious"];
+let i = 0, j = 0, borrando = false, speed = 100;
+
+function type() {
+    const elemento = document.getElementById("typing");
+    const texto = frases[i];
+    if (!borrando) {
+        elemento.textContent = texto.substring(0, j++);
+        if (j > texto.length) {
+            borrando = true;
+            setTimeout(type, 1000);
+            return;
+        }
+    } else {
+        elemento.textContent = texto.substring(0, j--);
+        if (j < 0) {
+            borrando = false;
+            i = (i + 1) % frases.length;
+        }
+    }
+    setTimeout(type, borrando ? 60 : speed);
+}
+type();
+
+const botones = document.querySelectorAll(".boton");
+botones.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const panel = btn.nextElementSibling;
+        panel.classList.toggle("open");
+    });
+});
+
+const projectsBtn = document.getElementById("projects-btn");
+const projectsOptions = document.getElementById("projects-options");
+projectsBtn.addEventListener("click", () => {
+    projectsOptions.style.display = projectsOptions.style.display === "flex" ? "none" : "flex";
+});
+</script>
+
+</body>
+</html>
