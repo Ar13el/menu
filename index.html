@@ -32,7 +32,7 @@ body{
 }
 
 .menu{
-    width: 95%;
+    width: 90%;
     max-width: 650px;
     background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(6px);
@@ -155,10 +155,18 @@ a{
     display: none;
 }
 span{
-
-
     font-size:medium;
     font-weight: bold;
+}
+
+@media (max-width: 720px) {
+    #side-menu {
+        display: none;
+    }
+    .menu {
+        width: 78%;
+        padding: 35px;
+    }
 }
 </style>
 </head>
@@ -173,7 +181,7 @@ span{
 <div class="menu">
     <div class="botones">
         <button class="boton">Skills</button>
-        <div class="panel">I work with these programming languages:<br>1.PHP (Laravel, Eloquent)<br>2.Python (Flask, MySQL, SQLite)<br>3.Node.js (Currently Learning)</div>
+        <div class="panel">I work with these programming languages:<br>1.PHP (Laravel, Eloquent)<br>2.Python (Flask)<br>3.MySQL/SQLite<br>4.Node.js (Currently Learning)</div>
 
         <button class="boton">Dev Tools</button>
         <div class="panel">I work with databases and development tools:<br>1.MySQL / SQLite<br>2.Git & GitHub<br>3.Dependency management (Composer)</div>
@@ -182,7 +190,7 @@ span{
         <div class="panel">Other skills and tools:<br>1.Frontend basics (HTML, CSS, JS)<br>2.Deployment & Hosting (GitHub Pages)<br>3.Unit Testing (PHPUnit, Pytest)</div>
 
         <button class="boton">My Works</button>
-        <div class="panel">My works (Click to go):<br><a href="https://ar13el.github.io/ideonline/" target="_blank">1.IDE Online</a></div>
+        <div class="panel">My works (Click to go):<br><a href="https://ar13el.github.io/ideonline/" target="_blank">1.IDE Online</a><br><a>2.To do list(Currently Working)</a></div>
     </div>
 </div>
 
@@ -227,9 +235,11 @@ botones.forEach((btn) => {
 
 const projectsBtn = document.getElementById("projects-btn");
 const projectsOptions = document.getElementById("projects-options");
-projectsBtn.addEventListener("click", () => {
-    projectsOptions.style.display = projectsOptions.style.display === "flex" ? "none" : "flex";
-});
+if (projectsBtn) {
+    projectsBtn.addEventListener("click", () => {
+        projectsOptions.style.display = projectsOptions.style.display === "flex" ? "none" : "flex";
+    });
+}
 </script>
 
 </body>
